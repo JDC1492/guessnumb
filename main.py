@@ -12,16 +12,26 @@ import random
 
 selected_number = random.randint(1, 100)
 is_game_over = False
+guess = 0
 print("Welcome to the Guessing Game.")
+difficulty = input("Easy or Hard?\n").lower()
+
+if difficulty == 'easy':
+  guess = 10
+elif difficulty =='hard':
+  guess = 5
 
 while not is_game_over:
   plr_guess = int(input("Guess a number between 1-100:\n"))
   if plr_guess < selected_number:
-    print("Too Low")
+    guess -= 1
+    print(f"Too Low. {guess} tries left.")
   elif plr_guess > selected_number:
-    print("Too High")
+    guess -= 1
+    print(f"Too High. {guess} tries left.")
   elif plr_guess == selected_number:
     is_game_over = True
-    print(f"Correct!! The selected_number was: {selected_number}")
-
-
+    print(f"Correct!! The selected_number was: {selected_number}, with only {guess} tries left.")
+  if guess == 0:
+    is_game_over = True
+    print(f"Game Over! The number was {selected_number}.")
